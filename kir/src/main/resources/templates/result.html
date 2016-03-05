@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Rendelés összegzés</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Rendelés összegzés</h1>
+    <p th:text="'Rendelés azon.: ' + ${response.id}" />
+    <p th:text="'Fizetendő: ' + ${response.total} + ' Ft'" />
+    <a href="/order">Új rendelés küldése</a>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Új rendelés</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Rendelés</h1>
+	<form action="#" th:action="@{/order}" th:object="${order}"
+		method="post">
+		<p>
+			Vevő azon.: <input type="text" th:field="*{customer}" />
+		</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Termékek</th>
+					<th>Termék azon.</th>
+					<th>Darabszám</th>
+					<th>
+						<button type="submit" name="addRow">Add row</button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="row,rowStat : *{position}">
+					<td th:text="${rowStat.count}">1</td>
+					<td><select
+						th:field="*{position[__${rowStat.index}__].product}">
+							<option th:each="var : ${product}" th:value="${var.id}"
+								th:text="${var.name} +' ' + ${var.unitPrice} + ' Ft'"></option>
+					</select> 
+					</td>
+					<td><input type="number"
+						th:field="*{position[__${rowStat.index}__].quantity}" /></td>
+					<td>
+						<button type="submit" name="removeRow" th:value="${rowStat.index}">Remove
+							row</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+
+
+
+		<p>
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
+		</p>
+	</form>
+</body>
+</html>
